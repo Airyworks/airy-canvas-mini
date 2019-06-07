@@ -1,0 +1,21 @@
+const boardWrapper = require('./modules/tikv')
+
+module.exports = (io, opt) => {
+  const connections = []
+  io.on('connection', client => {
+    connections.push(client)
+    const int = setInterval(async () => {
+      // emit event here
+      tikvWrapper(client, opt)
+      tidbWrapper(client, opt)
+      pdWrapper(client, opt)
+      dashboardWrapper(client, opt)
+    }, 3000)
+    client.on('disconnect', () => {
+      const index = connections.indexOf(client)
+      connections.splice(index, 1)
+      clearInterval(int)
+    })
+  })
+  return io
+}
