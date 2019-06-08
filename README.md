@@ -2,21 +2,20 @@
 
 > airy-canvas mini demo
 
-## Build Setup
+## Quick start
 
-``` bash
-# install dependencies
-$ yarn install
-
-# serve with hot reload at localhost:3000
-$ yarn run dev
-
-# build for production and launch server
-$ yarn run build
-$ yarn start
-
-# generate static project
-$ yarn run generate
+```
+docker run \
+  -p 3333:3000 \
+  -d \
+  you06/airy-canvas-mini
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+## Manual build
+
+```sh
+git clone https://github.com/Airyworks/airy-canvas-mini.git
+cd airy-canvas-mini
+yarn && yarn build
+yarn start
+```

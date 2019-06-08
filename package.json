@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
-    "airy-canvas": "../airy-canvas",
+    "airy-canvas": "^1.0.0",
     "cross-env": "^5.2.0",
     "koa": "^2.6.2",
     "nuxt": "^2.4.0",
