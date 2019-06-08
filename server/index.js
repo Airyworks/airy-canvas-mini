@@ -38,7 +38,7 @@ async function start() {
     nuxt.render(ctx.req, ctx.res)
   })
 
-  ioWrapper(io, { cluster, store, dashboard })
+  ioWrapper(io, { store })
 
   server.listen(port, host)
   consola.ready({
