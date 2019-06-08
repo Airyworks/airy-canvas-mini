@@ -1,6 +1,6 @@
 # airy-canvas-mini
 
-> airy-canvas mini demo
+> [airy-canvas](https://github.com/Airyworks/airy-canvas-mini) mini demo
 
 ## Quick start
 
