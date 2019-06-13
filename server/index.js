@@ -4,6 +4,7 @@ const { Nuxt, Builder } = require('nuxt')
 const Store = require('./store')
 
 const app = new Koa()
+app.use(require('koa-bodyparser')())
 const server = require('http').createServer(app.callback())
 const io = require('socket.io')(server)
 const ioWrapper = require('./socket')
@@ -30,7 +31,11 @@ async function start() {
   }
 
   const store = new Store()
+  const router = require('./http/')({ store })
 
+  app
+    .use(router.routes())
+    .use(router.allowedMethods())
   app.use((ctx) => {
     ctx.status = 200
     ctx.respond = false // Bypass Koa's built-in response handling

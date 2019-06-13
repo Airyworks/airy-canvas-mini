@@ -36,7 +36,9 @@ module.exports = {
     {
       src: '~/plugins/airy-canvas',
       mode: 'client'
-    }
+    },
+    '~/plugins/font-awesome',
+    '~/plugins/v-clipboard'
   ],
 
   /*
@@ -51,6 +53,7 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    prefix: '/api/v1'
   },
 
   /*

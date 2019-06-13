@@ -13,13 +13,19 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@fortawesome/vue-fontawesome": "^0.1.6",
     "@nuxtjs/axios": "^5.3.6",
-    "airy-canvas": "^1.0.2",
+    "airy-canvas": "^1.0.3",
     "cross-env": "^5.2.0",
     "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
     "nuxt": "^2.4.0",
     "socket.io": "^2.2.0",
-    "socket.io-client": "^2.2.0"
+    "socket.io-client": "^2.2.0",
+    "v-clipboard": "^2.2.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",

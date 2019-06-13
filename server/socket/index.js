@@ -3,7 +3,9 @@ module.exports = (io, { store }) => {
   io.on('connection', client => {
     connections.push(client)
     client.on('airy-hello', (data) => {
-      store.join(client.id, data.key, client)
+      client.emit('airy-hello', {
+        status: store.join(client.id, data.key, client)
+      })
     })
     client.on('disconnect', () => {
       const index = connections.indexOf(client)

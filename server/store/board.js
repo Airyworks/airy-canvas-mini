@@ -1,7 +1,7 @@
 class Board {
-  constructor() {
+  constructor(history) {
     this.clients = []
-    this.history = []
+    this.history = history || []
   }
 
   join(id, client) {
