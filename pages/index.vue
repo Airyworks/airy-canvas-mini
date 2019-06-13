@@ -66,6 +66,7 @@
 
 <script>
 import io from 'socket.io-client'
+import axios from 'axios'
 import Box from '@/components/Box'
 import AiryButton from '@/components/AiryButton'
 import AiryModal from '@/components/AiryModal'
@@ -125,9 +126,10 @@ export default {
     async share() {
       this.modalOpen = true
       if (!location.hash) {
-        const data = await this.$axios.$post('/board', {
+        const { data } = await axios.post('/api/v1/board', {
           history: this.$refs['airy-canvas'].getHistory()
         })
+        console.log(data)
         this.shareKey = data.key
         location.hash = `#${data.key}`
         this.shareLink = location.href
