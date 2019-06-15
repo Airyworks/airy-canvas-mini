@@ -1,7 +1,10 @@
 class Board {
-  constructor(history) {
-    this.clients = []
+  constructor(key, history, redis) {
+    this.key = key
     this.history = history || []
+    this.redis = redis
+    this.clients = []
+    this.fetchHistory()
   }
 
   join(id, client) {

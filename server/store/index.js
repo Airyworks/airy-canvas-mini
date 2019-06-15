@@ -1,11 +1,12 @@
+const Redis = require('./redis')
 const generateKey = require('../utils').generateKey
 const Board = require('./board')
 
 class Store {
-  constructor() {
+  constructor(redis) {
     this.keys = []
     this.boards = {}
-    this.boards['test-key'] = new Board()
+    this.redis = new Redis(redis)
   }
 
   join(id, key, client) {
@@ -35,7 +36,7 @@ class Store {
     while (this.boards[key]) {
       key = generateKey()
     }
-    this.boards[key] = new Board(history)
+    this.boards[key] = new Board(key, history, this.redis)
     return {
       key
     }
