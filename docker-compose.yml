@@ -1,14 +1,25 @@
 version: '3'
 
+networks:
+  app_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.16.100.0/24"
+
 services:
   redis:
     image: "redis"
+    networks:
+      app_net:
+        ipv4_address: 172.16.100.5
     volumes:
-      - ./data:/data
+      - "data:/data"
   airy-canvas-mini:
     image: "you06/airy-canvas-mini"
-    ports:
-      - "3333:3000"
+    networks:
+      app_net:
+        ipv4_address: 172.16.100.10
     depends_on:
       - redis
     command:
@@ -16,3 +27,6 @@ services:
       - start
       - -r
       - redis
+
+volumes:
+  data:
