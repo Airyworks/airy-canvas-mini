@@ -16,7 +16,7 @@ docker run \
 
 ### docker-compose with redis integrate
 - create a directory
-- create `docker-compose.yml`, this is a example [docker-compose](https://github.com/Airyworks/airy-canvas-mini/blob/master/Dockerfile)
+- create `docker-compose.yml`, this is a example [docker-compose](https://github.com/Airyworks/airy-canvas-mini/blob/master/docker-compose.yml)
 - create `data` directory for data persistent
 - run `docker-compose up -d`
 
