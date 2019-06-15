@@ -13,6 +13,6 @@ module.exports = function(router, { store }) {
     if (!Array.isArray(history)) {
       history = []
     }
-    ctx.body = store.createBoard(history)
+    ctx.body = await store.createBoard(history)
   })
 }

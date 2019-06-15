@@ -19,6 +19,7 @@
     "@nuxtjs/axios": "^5.3.6",
     "airy-canvas": "^1.0.3",
     "axios": "^0.19.0",
+    "bluebird": "^3.5.5",
     "commander": "^2.20.0",
     "cross-env": "^5.2.0",
     "koa": "^2.6.2",
