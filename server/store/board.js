@@ -1,7 +1,9 @@
 class Board {
-  constructor(history) {
-    this.clients = []
+  constructor(key, history, redis) {
+    this.key = key
     this.history = history || []
+    this.redis = redis
+    this.clients = []
   }
 
   join(id, client) {
@@ -30,8 +32,14 @@ class Board {
   }
 
   broadcast(data, filter) {
-    this.clients.filter(filter).forEach(client => {
-      client.emit('airy-update', data)
+    const storeData = {}
+    storeData[data.uuid] = JSON.stringify(data)
+    this.redis.hmset(this.key, storeData).then((res) => {
+      if (res) {
+        this.clients.filter(filter).forEach(client => {
+          client.emit('airy-update', data)
+        })
+      }
     })
   }
 }

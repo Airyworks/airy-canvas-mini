@@ -1,6 +1,7 @@
 const Koa = require('koa')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
+const program = require('commander')
 const Store = require('./store')
 
 const app = new Koa()
@@ -12,6 +13,12 @@ const ioWrapper = require('./socket')
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
 config.dev = !(app.env === 'production')
+
+// commander configuration
+program
+  .version(require('../package.json').version)
+  .option('-r, --redis [type]', 'Redis host and port')
+  .parse(process.argv)
 
 async function start() {
   // Instantiate nuxt.js
@@ -30,7 +37,7 @@ async function start() {
     await nuxt.ready()
   }
 
-  const store = new Store()
+  const store = new Store(program.redis)
   const router = require('./http/')({ store })
 
   app
