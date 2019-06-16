@@ -51,7 +51,6 @@ export default {
   left: 50%;
   width: 600px;
   height: 300px;
-  padding: 20px;
   margin-left: -300px;
   background: #fff;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.12);

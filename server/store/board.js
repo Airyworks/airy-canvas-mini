@@ -1,5 +1,8 @@
+const maxMember = 10
+
 class Board {
   constructor(key, history, redis) {
+    this.maxMember = maxMember
     this.key = key
     this.history = history || []
     this.redis = redis
@@ -21,6 +24,7 @@ class Board {
   }
 
   registerClient(client) {
+    this.broadcastBasicInfo()
     client.emit('airy-history', this.history)
     client.on('airy-update', data => {
       this.history.push(data)
@@ -28,6 +32,7 @@ class Board {
     })
     client.on('disconnect', () => {
       this.removeById(client.id)
+      this.broadcastBasicInfo()
     })
   }
 
@@ -41,6 +46,22 @@ class Board {
         })
       }
     })
+  }
+
+  broadcastBasicInfo() {
+    const basicInfo = this.basicInfo()
+    this.clients.forEach(client => {
+      client.emit('airy-basic-info', basicInfo)
+    })
+  }
+
+  basicInfo() {
+    return {
+      key: this.key,
+      message: this.history.length,
+      member: this.clients.length,
+      maxMember: this.maxMember
+    }
   }
 }
 

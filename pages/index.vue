@@ -9,9 +9,23 @@
       />
     </no-ssr>
     <box class="share-box">
-      <airy-button @click="share">
+      <airy-button v-if="ifShare" class="share-button group-member-info">
+        <font-awesome-icon
+          class="group-member-info-icon"
+          :icon="faUsers"
+          size="1x"
+        />
+        {{ member }} / {{ maxMember }}
+      </airy-button>
+      <airy-button class="share-button" @click="share">
         <font-awesome-icon
           :icon="faShare"
+          size="1x"
+        />
+      </airy-button>
+      <airy-button class="share-button" @click="createCanvas">
+        <font-awesome-icon
+          :icon="faPlus"
           size="1x"
         />
       </airy-button>
@@ -19,7 +33,7 @@
     <airy-modal :open.sync="modalOpen" class="share-modal">
       <div v-if="ifShare">
         <div>
-          公共链接（测试中，暂无持久化，请勿储存重要信息）
+          公共链接
         </div>
         <div>
           <span>
@@ -70,7 +84,14 @@ import axios from 'axios'
 import Box from '@/components/Box'
 import AiryButton from '@/components/AiryButton'
 import AiryModal from '@/components/AiryModal'
-import { faShare, faCopy, faCheck, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import {
+  faShare,
+  faCopy,
+  faCheck,
+  faSpinner,
+  faPlus,
+  faUsers
+} from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: {
@@ -88,7 +109,10 @@ export default {
       shareLink: '',
       copyComplete: false,
       ifShare: false,
-      shareKey: ''
+      shareKey: '',
+      socket: null,
+      member: 0,
+      maxMember: 0
     }
   },
   computed: {
@@ -103,6 +127,12 @@ export default {
     },
     faSpinner() {
       return faSpinner
+    },
+    faPlus() {
+      return faPlus
+    },
+    faUsers() {
+      return faUsers
     }
   },
   mounted() {
@@ -129,7 +159,6 @@ export default {
         const { data } = await axios.post('/api/v1/board', {
           history: this.$refs['airy-canvas'].getHistory()
         })
-        console.log(data)
         this.shareKey = data.key
         location.hash = `#${data.key}`
         this.shareLink = location.href
@@ -139,6 +168,7 @@ export default {
         this.ifShare = true
       }
     },
+    createCanvas() {},
     copyLink() {
       this.copyComplete = true
       setTimeout(() => {
@@ -170,6 +200,11 @@ export default {
         socket.on('airy-update', (data) => {
           this.$refs['airy-canvas'].updateNode(data)
         })
+        socket.on('airy-basic-info', (data) => {
+          this.member = data.member
+          this.maxMember = data.maxMember
+          this.ifShare = true
+        })
       })
     }
   }
@@ -184,9 +219,17 @@ export default {
   position: absolute;
   top: 20px;
   right: 20px;
+  display: flex;
+  padding: 0 10px;
+}
+.share-button {
+  padding: 0 10px;
 }
 .share-modal {
   text-align: center;
+}
+.group-member-info-icon {
+  margin-right: 10px;
 }
 .copy-share-link {
   cursor: pointer;
