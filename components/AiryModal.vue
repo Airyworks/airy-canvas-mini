@@ -57,7 +57,7 @@ export default {
   z-index: 500;
 }
 .modal-header {
-  padding-bottom: 20px;
+  padding: 20px;
   text-align: right;
 }
 .modal-header-close {

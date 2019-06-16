@@ -168,7 +168,16 @@ export default {
         this.ifShare = true
       }
     },
-    createCanvas() {},
+    createCanvas() {
+      this.socket.disconnect()
+      this.socket = null
+      this.ifShare = false
+      location.hash = ''
+      this.shareKey = ''
+      this.shareLink = ''
+      this.airyCanvasData = []
+      this.$refs['airy-canvas'].clear()
+    },
     copyLink() {
       this.copyComplete = true
       setTimeout(() => {

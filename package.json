@@ -17,7 +17,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/vue-fontawesome": "^0.1.6",
     "@nuxtjs/axios": "^5.3.6",
-    "airy-canvas": "^1.0.3",
+    "airy-canvas": "^1.0.4",
     "axios": "^0.19.0",
     "bluebird": "^3.5.5",
     "commander": "^2.20.0",
