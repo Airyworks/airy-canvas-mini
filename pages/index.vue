@@ -81,9 +81,6 @@
 <script>
 import io from 'socket.io-client'
 import axios from 'axios'
-import Box from '@/components/Box'
-import AiryButton from '@/components/AiryButton'
-import AiryModal from '@/components/AiryModal'
 import {
   faShare,
   faCopy,
@@ -92,6 +89,9 @@ import {
   faPlus,
   faUsers
 } from '@fortawesome/free-solid-svg-icons'
+import Box from '@/components/Box'
+import AiryButton from '@/components/AiryButton'
+import AiryModal from '@/components/AiryModal'
 
 export default {
   components: {
