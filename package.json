@@ -18,7 +18,7 @@
     "@fortawesome/vue-fontawesome": "^0.1.6",
     "@nuxtjs/axios": "^5.3.6",
     "airy-canvas": "1.0.6",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bluebird": "^3.5.5",
     "commander": "^2.20.0",
     "cross-env": "^5.2.0",
